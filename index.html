@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>base64 decode & encode strings (all local)</title>
+    <style>
+        body {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 300px;
+            padding: 4px;
+            margin-left: 1rem;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .leading {
+            grid-column: 1;
+        }
+
+        .trailing {
+            grid-column: 2;
+        }
+
+        footer {
+            padding: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>base64 decode & encode (all local)</h1>
+    <p>We do not record anything. All logic is done on the client side.</p>
+
+    <div class="container">
+
+        <div class="leading">
+            <h2>decoded text (edit me)</h2>
+            <textarea id="decoded" oninput="decodeUpdated();">Hello world</textarea>
+        </div>
+
+        <div class="trailing">
+            <h2>encoded base64 (edit me)</h2>
+            <textarea id="encoded" oninput="encodeUpdated();"></textarea>
+        </div>
+
+        <footer>
+            <a href="https://rexfeng.com">xta</a> 2024 <a href="https://github.com/xta/base64-decode-encode">view on
+                github</a>
+        </footer>
+    </div>
+</body>
+
+<script>
+    function decodeUpdated() {
+        var input = document.getElementById('decoded');
+        var target = document.getElementById('encoded');
+        target.value = btoa(input.value);
+    }
+
+    function encodeUpdated() {
+        var input = document.getElementById('encoded');
+        var target = document.getElementById('decoded');
+        target.value = atob(input.value);
+    }
+
+    decodeUpdated();
+</script>
+
+</html>
