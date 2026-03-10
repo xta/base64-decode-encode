@@ -17,6 +17,10 @@
             margin-left: 1rem;
         }
 
+        textarea.error {
+            outline: 2px solid crimson;
+        }
+
         .container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -46,12 +50,12 @@
 
         <div class="leading">
             <h2>decoded text (edit me)</h2>
-            <textarea id="decoded" oninput="decodeUpdated();">Hello world</textarea>
+            <textarea id="decoded">Hello world</textarea>
         </div>
 
         <div class="trailing">
             <h2>encoded base64 (edit me)</h2>
-            <textarea id="encoded" oninput="encodeUpdated();"></textarea>
+            <textarea id="encoded"></textarea>
         </div>
 
         <footer>
@@ -61,20 +65,27 @@
     </div>
 </body>
 
-<script>
-    function decodeUpdated() {
-        var input = document.getElementById('decoded');
-        var target = document.getElementById('encoded');
-        target.value = btoa(input.value);
-    }
+<script type="module">
+    import { encode, decode } from './base64.js';
 
-    function encodeUpdated() {
-        var input = document.getElementById('encoded');
-        var target = document.getElementById('decoded');
-        target.value = atob(input.value);
-    }
+    const decodedEl = document.getElementById('decoded');
+    const encodedEl = document.getElementById('encoded');
 
-    decodeUpdated();
+    decodedEl.addEventListener('input', () => {
+        encodedEl.value = encode(decodedEl.value);
+    });
+
+    encodedEl.addEventListener('input', () => {
+        try {
+            decodedEl.value = decode(encodedEl.value);
+            encodedEl.classList.remove('error');
+        } catch {
+            encodedEl.classList.add('error');
+        }
+    });
+
+    // initialize
+    encodedEl.value = encode(decodedEl.value);
 </script>
 
 </html>

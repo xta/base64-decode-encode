@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "scripts": {
+    "test": "node base64.test.js",
+    "start": "python3 -m http.server 8080"
+  }
+}
