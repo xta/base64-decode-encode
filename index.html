@@ -73,6 +73,7 @@
 
     decodedEl.addEventListener('input', () => {
         encodedEl.value = encode(decodedEl.value);
+        encodedEl.classList.remove('error');
     });
 
     encodedEl.addEventListener('input', () => {
